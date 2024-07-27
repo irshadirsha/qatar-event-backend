@@ -9,7 +9,10 @@ const typesRouter = require("./src/routes/typesRouter");
 const itemsRouter = require("./src/routes/itemsRouter");
 const clientRouter = require("./src/routes/clientRouter");
 const calendarRouter = require("./src/routes/calendarRouter");
+<<<<<<< HEAD
 const eventRouter = require("./src/routes/eventRouter");
+=======
+>>>>>>> f55688a4d24647ac6f0c553b7017daa7125bb7dc
 const userDetailRouter = require("./src/routes/userDetailRouter");
 
 const app = express();
@@ -55,6 +58,7 @@ app.use("/api/v1/types", typesRouter);
 app.use("/api/v1/items", itemsRouter);
 app.use("/api/v1/events", eventRouter);
 app.use("/api/v1/", clientRouter);
+app.use("/api/v1/", userDetailRouter);
 app.use("/api/v1/", calendarRouter);
 app.use("/api/v1/", userDetailRouter);
 
