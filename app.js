@@ -9,11 +9,9 @@ const typesRouter = require("./src/routes/typesRouter");
 const itemsRouter = require("./src/routes/itemsRouter");
 const clientRouter = require("./src/routes/clientRouter");
 const calendarRouter = require("./src/routes/calendarRouter");
-<<<<<<< HEAD
 const eventRouter = require("./src/routes/eventRouter");
-=======
->>>>>>> f55688a4d24647ac6f0c553b7017daa7125bb7dc
 const userDetailRouter = require("./src/routes/userDetailRouter");
+const eventTicketRouter = require('./src/routes/eventTicketRouter')
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -53,6 +51,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/", bookingRouter);
+app.use("/api/v1/", eventTicketRouter);
 app.use("/api/v1/", userRouter);
 app.use("/api/v1/types", typesRouter);
 app.use("/api/v1/items", itemsRouter);

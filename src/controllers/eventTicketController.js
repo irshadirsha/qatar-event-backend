@@ -1,9 +1,36 @@
 const TicketBooking = require("../models/eventTicketModel")
-
+const sendEmails = require("../ManageEmail/SendEmail")
+const User = require("../models/userModel");
+// const Event = require("../models/eventModel")
 const TickBooking=async(req,res)=>{
+    console.log("api called succesfully")
     try {
         const { userId, eventId, tickets, totalPrice, notes,bookingCategory,}=req.body
         console.log("api called ---.",userId, eventId, tickets, totalPrice, notes,bookingCategory)
+        
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({status: "fail", message: "User not found" });
+        }
+        const userEmail = user.email;
+        console.log("userEmail",userEmail)
+
+        // const event = await Event.findById(eventId)
+        // if (!event) {
+        //     return res.status(404).json({ status: "fail", message: "Event not found" });
+        //   }
+        //   const eventName = event.name;
+        const subject = "Your Event Booking Details";
+        
+        const message = `Thank you for booking with us! Here are your booking details:
+        - Event ID: ${eventId}
+        - Tickets: ${tickets}
+        - Total Price: $${totalPrice}
+        - Booking Category: ${bookingCategory}
+        - Notes: ${notes || "No additional notes"}
+        `;
+
+        sendEmails(userEmail,subject,message)
         const newBooking = new TicketBooking ({
             userId,
             eventId,
